@@ -6,13 +6,20 @@ session_start();
 */
 require 'app/sys/config.php';
 require 'app/sys/util.php';
+require 'app/sys/errors.php';
 #require 'sys/Pagination.php';
 #require 'sys/validate.php';
 #require 'sys/messages.php';
-require 'app/models/Model.php';
-require 'app/models/Usuario.php';
-require 'app/models/Veiculo.php';
 
+#importa todos os models automaticamente
+require 'app/models/Model.php';
+$path = "app/models/";
+$handle = opendir($path);
+while($file = readdir($handle)){
+	if ($file != "Model.php" && is_file($path.$file)){
+		require $path.$file;
+	}
+}
 
 $server_url = "http://".$_SERVER['SERVER_NAME'] . explode("index.php",$_SERVER['SCRIPT_NAME'])[0];
 
@@ -159,46 +166,29 @@ $r = new ReflectionMethod( $controller, $metodo );
 $params = $r->getParameters();
 $methodDoc = strtolower($r->getDocComment());
 
+
+
 if ( !empty( $params ) ) {
 	$param_names = array();
+
+	
 	foreach ( $params as $param ) {
 		$obj = null;
 		$paramName = $param->getName();
 		
-		//Para parametros primitivos
-		if ($param->getDeclaringClass() == null){
-
-			foreach($request as $key=>$req ){
-				if ($key == $paramName){
-					if ($_REQUEST[$key] == ""){
-						$obj = null;
-					} else {
-						$obj = $_REQUEST[$key];
-					}
-					unset($request[$key]);
+		//Para parametros primitivos somente
+		foreach($request as $key=>$req ){
+			if ($key == $paramName){
+				if ($_REQUEST[$key] == ""){
+					$obj = null;
+				} else {
+					$obj = $_REQUEST[$key];
 				}
+				unset($request[$key]);
 			}
-			
-
-		} else {
-			//Para parametros não primitivos
-			$className = $param->getDeclaringClass()->getName();
-						
-			foreach($request as $key=>$req ){
-				if (strstr($key,$paramName)){
-					if ($obj == null){
-						$obj = new $className();
-					}
-
-					$attribute = str_replace($paramName."_","",$key);
-					$obj->$attribute = $_REQUEST[$key];
-					unset($request[$key]);
-				}
-			}
-
 		}
-
-
+		
+		
 		array_push($params_to_controller, $obj);
 	}
 }
