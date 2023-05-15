@@ -1,16 +1,26 @@
 <?php
-use models\Veiculo;
+use models\ObraUsuario;
 
-class VeiculosController {
+/**
+* Tutorial CRUD
+* Autor:Alan Klinger 05/06/2017
+*/
 
-	
+#A classe devera sempre iniciar com letra maiuscula
+#terá sempre o mesmo nome do arquivo
+#e precisa terminar com a palavra Controller
+class UsuariosController {
+
+	/**
+	* Para acessar http://localhost/NOMEDOPROJETO/usuarios/index
+	**/
 	function index($id = null){
 
 		#variáveis que serao passados para a view
 		$send = [];
 
 		#cria o model
-		$model = new Veiculo();
+		$model = new ObraUsuario();
 		
 		
 		$send['data'] = null;
@@ -23,16 +33,16 @@ class VeiculosController {
 		#busca todos os registros
 		$send['lista'] = $model->all();
 
-		#$send['tipos'] = [0=>"Escolha uma opção", 1=>"Usuário comum", 2=>"Admin"];
+		$send['tipos'] = [0=>"Escolha uma opção", 1=>"Usuário comum", 2=>"Admin"];
 
 		#chama a view
-		render("veiculos", $send);
+		render("obrasUsuarios", $send);
 	}
 
 	
 	function salvar($id=null){
 
-		$model = new Veiculo();
+		$model = new ObraUsuario();
 		
 		if ($id == null){
 			$id = $model->save($_POST);
@@ -40,15 +50,15 @@ class VeiculosController {
 			$id = $model->update($id, $_POST);
 		}
 		
-		redirect("veiculos/index/$id");
+		redirect("obrasUsuarios/index/$id");
 	}
 
 	function deletar(int $id){
 		
-		$model = new Veiculo();
+		$model = new ObraUsuario();
 		$model->delete($id);
 
-		redirect("veiculos/index/");
+		redirect("obrasUsuarios/index/");
 	}
 
 

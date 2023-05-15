@@ -2,26 +2,26 @@
 
 
 
-<form method='POST' action='<?=route('veiculos/salvar/'._v($data,"id"))?>'>
+<form method='POST' action='<?=route('obras/salvar/'._v($data,"id"))?>'>
 
 <label class='col-md-6'>
-    Placa
-    <input type="text" class="form-control" name="placa" value="<?=_v($data,"placa")?>" >
+    Titulo
+    <input type="text" class="form-control" name="titulo" value="<?=_v($data,"titulo")?>" >
 </label>
 
 <label class='col-md-2'>
-    Modelo
-    <input type="text" class="form-control" name="modelo" value="<?=_v($data,"modelo")?>" >
+    Tipo
+    <input type="text" class="form-control" name="tipo" value="<?=_v($data,"tipo")?>" >
 </label>
 
 <label class='col-md-2'>
-    Cor
-    <input type="text" class="form-control" name="cor" value="<?=_v($data,"cor")?>" >
+    Edicao
+    <input type="text" class="form-control" name="edicao" value="<?=_v($data,"edicao")?>" >
 </label>
 
 <label class='col-md-2'>
-    Ano
-    <input type="text" class="form-control" name="ano" value="<?=_v($data,"ano")?>" >
+    Valor
+    <input type="text" class="form-control" name="valor" value="<?=_v($data,"valor")?>" >
 </label>
 
 
@@ -38,7 +38,7 @@
 </label> -->
 
 <button class='btn btn-primary col-12 col-md-3 mt-3'>Salvar</button>
-<a class='btn btn-secondary col-12 col-md-3 mt-3' href="<?=route("veiculos")?>">Novo</a>
+<a class='btn btn-secondary col-12 col-md-3 mt-3' href="<?=route("obras")?>">Novo</a>
 
 </form>
 
@@ -46,8 +46,8 @@
 
     <tr>
         <th>Editar</th>
-        <th>Placa</th>
-        <th>Modelo</th>
+        <th>Titulo</th>
+        <th>Tipo</th>
         <th>Deletar</th>
     </tr>
 
@@ -55,12 +55,12 @@
 
         <tr>
             <td>
-                <a href='<?=route("veiculos/index/{$item['id']}")?>'>Editar</a>
+                <a href='<?=route("obras/index/{$item['id']}")?>'>Editar</a>
             </td>
-            <td><?=$item['placa']?></td>
-            <td><?=$item['modelo']?></td>
+            <td><?=$item['titulo']?></td>
+            <td><?=$item['tipo']?></td>
             <td>
-                <a href='<?=route("veiculos/deletar/{$item['id']}")?>'>Deletar</a>
+                <a href='<?=route("obras/deletar/{$item['id']}")?>'>Deletar</a>
             </td>
         </tr>
 

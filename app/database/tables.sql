@@ -13,12 +13,22 @@ INSERT INTO usuarios (id, nome, dataNascimento, tipo, ativado) values (2,'teste 
 INSERT INTO usuarios (id, nome, dataNascimento, tipo, ativado) values (3,'teste 3','01-01-2003',1,1);
 
 
-DROP TABLE IF EXISTS veiculos;
+DROP TABLE IF EXISTS obras;
 
-CREATE TABLE IF NOT EXISTS veiculos (
+CREATE TABLE IF NOT EXISTS obras (
     id              INTEGER PRIMARY KEY,
-    placa           TEXT    NOT NULL,
-    modelo          TEXT,
-    cor             TEXT,
-    ano             INTEGER
+    titulo          TEXT    NOT NULL,
+    tipo            TEXT,
+    edicao          TEXT,
+    valor           INTEGER
+);
+
+DROP TABLE IF EXISTS obrasUsuarios;
+
+CREATE TABLE IF NOT EXISTS obrasUsuarios (
+    id              INTEGER PRIMARY KEY,
+    titulo          TEXT    NOT NULL,
+    tipo            TEXT,
+    descricao       TEXT,
+    valorDesejado   INTEGER
 );

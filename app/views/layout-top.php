@@ -26,7 +26,10 @@
           <a class="nav-link" href="<?=route('usuarios')?>">Usuários</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=route('veiculos')?>">Veículos</a>
+          <a class="nav-link" href="<?=route('obras')?>">Obras</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=route('obrasUsuarios')?>">Anexar Obra</a>
         </li>
       </ul>
     </div>
