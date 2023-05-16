@@ -45,7 +45,7 @@ class ObrasController {
 
 	function deletar(int $id){
 		
-		$model = new Veiculo();
+		$model = new Obra();
 		$model->delete($id);
 
 		redirect("obras/index/");

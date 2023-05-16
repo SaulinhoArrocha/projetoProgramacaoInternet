@@ -9,7 +9,7 @@ use models\ObraUsuario;
 #A classe devera sempre iniciar com letra maiuscula
 #terá sempre o mesmo nome do arquivo
 #e precisa terminar com a palavra Controller
-class UsuariosController {
+class ObrasUsuariosController {
 
 	/**
 	* Para acessar http://localhost/NOMEDOPROJETO/usuarios/index
