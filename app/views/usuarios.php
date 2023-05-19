@@ -10,8 +10,8 @@
 </label>
 
 <label class='col-md-2'>
-    Data de nascimento
-    <input type="text" class="form-control" name="dataNascimento" value="<?=_v($data,"dataNascimento")?>" >
+    E-mail
+    <input type="text" class="form-control" name="email" value="<?=_v($data,"email")?>" >
 </label>
 
 <label class='col-md-2'>
@@ -42,7 +42,7 @@
     <tr>
         <th>Editar</th>
         <th>Nome</th>
-        <th>Data de nascimento</th>
+        <th>E-mail</th>
         <th>Deletar</th>
     </tr>
 
@@ -53,7 +53,7 @@
                 <a href='<?=route("usuarios/index/{$item['id']}")?>'>Editar</a>
             </td>
             <td><?=$item['nome']?></td>
-            <td><?=$item['dataNascimento']?></td>
+            <td><?=$item['email']?></td>
             <td>
                 <a href='<?=route("usuarios/deletar/{$item['id']}")?>'>Deletar</a>
             </td>
