@@ -1,5 +1,6 @@
 <?php
 use models\Obra;
+use models\Tipo;
 
 class ObrasController {
 
@@ -24,6 +25,11 @@ class ObrasController {
 		$send['lista'] = $model->all();
 
 		#$send['tipos'] = [0=>"Escolha uma opção", 1=>"Usuário comum", 2=>"Admin"];
+
+		#recupera a lista com todos os modelos
+        $modelosModel = new Tipo();
+        $send['tipos'] = $modelosModel->all();
+
 
 		#chama a view
 		render("obras", $send);
