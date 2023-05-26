@@ -8,36 +8,36 @@ class Obra extends Model {
     #nao esqueça da ID
     protected $fields = ["id","titulo","tipo_id","edicao","valor"];
     
-}
 
-public function findById($id){
-    $sql = "SELECT obras.*, tipos.tipo AS tipo FROM {$this->table} "
-            ." LEFT JOIN tipos ON tipos.id = obras.tipo_id "
-            ." WHERE obras.id = :id";
-    $stmt = $this->pdo->prepare($sql);
-    $data = [':id' => $id];
-    $stmt->execute($data);
-    if ($stmt == false){
-        $this->showError($sql,$data);
+
+    public function findById($id){
+        $sql = "SELECT obras.*, tipos.tipo AS tipo FROM {$this->table} "
+                ." LEFT JOIN tipos ON tipos.id = obras.tipo_id "
+                ." WHERE obras.id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $data = [':id' => $id];
+        $stmt->execute($data);
+        if ($stmt == false){
+            $this->showError($sql,$data);
+        }
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
-    return $stmt->fetch(\PDO::FETCH_ASSOC);
-}
 
-public function all(){
-    $sql = "SELECT obras.*, tipos.tipo as tipo FROM {$this->table} "
-            ." LEFT JOIN tipos ON tipos.id = obras.modelo_id ";
-    
-    $stmt = $this->pdo->prepare($sql);
-    if ($stmt == false){
-        $this->showError($sql);
+    public function all(){
+        $sql = "SELECT obras.*, tipos.tipo as tipo FROM {$this->table} "
+                ." LEFT JOIN tipos ON tipos.id = obras.tipo_id ";
+        
+        $stmt = $this->pdo->prepare($sql);
+        if ($stmt == false){
+            $this->showError($sql);
+        }
+        $stmt->execute();
+        $list = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            array_push($list,$row);
+        }
+        return $list;
     }
-    $stmt->execute();
-    $list = [];
-    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-        array_push($list,$row);
-    }
-    return $list;
+
 }
-
-
 
