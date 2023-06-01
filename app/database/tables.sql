@@ -32,6 +32,19 @@ CREATE TABLE IF NOT EXISTS obras (
     REFERENCES tipos (tipo)
 );
 
+DROP TABLE IF EXISTS avaliacoes;
+CREATE TABLE IF NOT EXISTS avaliacoes (
+    id      INTEGER PRIMARY KEY,
+    usuario_id      TEXT    NOT NULL,
+    obra_id         TEXT    NOT NULL,
+    /* definicao de chave estrangeira */
+    FOREIGN KEY (usuario_id)
+       REFERENCES usuarios (id),
+    FOREIGN KEY (obra_id)
+       REFERENCES obras (id)
+);
+
+
 DROP TABLE IF EXISTS obrasUsuarios;
 
 CREATE TABLE IF NOT EXISTS obrasUsuarios (
