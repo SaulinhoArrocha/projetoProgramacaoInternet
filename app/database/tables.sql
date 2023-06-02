@@ -3,9 +3,7 @@ DROP TABLE IF EXISTS usuarios;
 CREATE TABLE IF NOT EXISTS usuarios (
     id              INTEGER PRIMARY KEY,
     nome            TEXT    NOT NULL,
-    email           TEXT,
-    tipo            INTEGER,
-    ativado         INTEGER
+    email           TEXT
 );
 
 DROP TABLE IF EXISTS tipos;
@@ -32,8 +30,8 @@ CREATE TABLE IF NOT EXISTS obras (
     REFERENCES tipos (tipo)
 );
 
-DROP TABLE IF EXISTS avaliacoes;
-CREATE TABLE IF NOT EXISTS avaliacoes (
+DROP TABLE IF EXISTS autores;
+CREATE TABLE IF NOT EXISTS autores (
     id      INTEGER PRIMARY KEY,
     usuario_id      TEXT    NOT NULL,
     obra_id         TEXT    NOT NULL,

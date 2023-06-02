@@ -6,7 +6,7 @@ class Usuario extends Model {
 
     protected $table = "usuarios";
     #nao esqueça da ID
-    protected $fields = ["id","nome","email","tipo","ativado"];
+    protected $fields = ["id","nome","email"];
     
     
     

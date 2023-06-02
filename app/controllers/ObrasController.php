@@ -1,6 +1,8 @@
 <?php
 use models\Obra;
 use models\Tipo;
+use models\Autor;
+use models\Usuario;
 
 class ObrasController {
 
@@ -30,6 +32,17 @@ class ObrasController {
         $modelosModel = new Tipo();
         $send['tipos'] = $modelosModel->all();
 
+		#recupera a lista com todos os usuarios
+        $usuModel = new Usuario();
+        $send['usuarios'] = $usuModel->all();
+
+		#se estiver editando um obra
+        if ($id != null){
+            #recupera todos as avaliações já setadas para esse obra
+            $send['autores'] = $model->getAutores($id);
+        }
+
+
 
 		#chama a view
 		render("obras", $send);
@@ -45,6 +58,14 @@ class ObrasController {
 		} else {
 			$id = $model->update($id, $_POST);
 		}
+
+		#se a id de um usuario/motorista tiver sido enviada
+        if (_v($_POST,'autor_id')){
+            $model = new Autor();
+            $dados = ["usuario_id"=> $_POST['autor_id'], "obra_id"=>$id];
+            $model->save($dados);
+        }
+
 		
 		redirect("obras/index/$id");
 	}
@@ -56,6 +77,16 @@ class ObrasController {
 
 		redirect("obras/index/");
 	}
+
+	function deletarAutor(int $idDoRelacionamento){
+       
+        $model = new Autor();
+        $rel = $model->findById($idDoRelacionamento);
+        $model->delete($idDoRelacionamento);
+
+        redirect("obras/index/{$rel['obra_id']}");
+    }
+
 
 
 }

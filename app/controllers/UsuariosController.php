@@ -33,7 +33,7 @@ class UsuariosController {
 		#busca todos os registros
 		$send['lista'] = $model->all();
 
-		$send['tipos'] = [0=>"Escolha uma opção", 1=>"Usuário comum", 2=>"Admin"];
+		#$send['tipos'] = [0=>"Escolha uma opção", 1=>"Usuário comum", 2=>"Admin"];
 
 		#chama a view
 		render("usuarios", $send);

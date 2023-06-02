@@ -39,5 +39,25 @@ class Obra extends Model {
         return $list;
     }
 
+    public function getAutores($idObra){
+        $sql = "SELECT * FROM usuarios
+            INNER JOIN autores ON
+                usuarios.id = autores.usuario_id
+            WHERE autores.obra_id = :idObra ";
+
+        $stmt = $this->pdo->prepare($sql);
+        if ($stmt == false){
+            $this->showError($sql);
+        }
+        $stmt->execute([':idObra' => $idObra]);
+
+        $list = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            array_push($list,$row);
+        }
+        return $list;
+}
+
+
 }
 

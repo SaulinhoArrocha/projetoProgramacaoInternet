@@ -21,7 +21,6 @@
     </select>
 </label>
 
-
 <label class='col-md-2'>
     Edicao
     <input type="text" class="form-control" name="edicao" value="<?=_v($data,"edicao")?>" >
@@ -31,6 +30,35 @@
     Valor
     <input type="text" class="form-control" name="valor" value="<?=_v($data,"valor")?>" >
 </label>
+
+<label class='col-md-6'>
+    Autores
+    <select name="autor_id" class="form-control">
+        <option></option>
+        <?php
+        foreach($usuarios as $usu){
+            print "<option value='{$usu['id']}'>{$usu['nome']}</option>";
+        }
+        ?>
+    </select>  
+</label>
+
+<?php if (_v($data,'id')) : ?>
+    <table class='table'>
+        <tr>
+            <th>Autor</th>
+            <th>Deletar</th>
+        </tr>
+        <?php foreach($autores as $item): ?>
+            <tr>
+                <td><?=$item['nome']?></td>
+                <td>
+                    <a href='<?=route("obras/deletarAutor/{$item['id']}")?>'>Deletar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>    
+<?php endif; ?>
 
 
 <!-- <label class='col-md-6'>
