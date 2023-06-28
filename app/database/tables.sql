@@ -1,3 +1,17 @@
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users (
+    id              INTEGER PRIMARY KEY,
+    nome            TEXT    NOT NULL,
+    dataNascimento  TEXT,
+    tipo            INTEGER,
+    ativado         INTEGER,
+    email           TEXT,
+    senha           TEXT
+);
+
+
 DROP TABLE IF EXISTS usuarios;
 
 CREATE TABLE IF NOT EXISTS usuarios (

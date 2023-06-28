@@ -1,5 +1,5 @@
 <?php
-use models\Usuario;
+use models\User;
 
 /**
 * Tutorial CRUD
@@ -9,7 +9,7 @@ use models\Usuario;
 #A classe devera sempre iniciar com letra maiuscula
 #terá sempre o mesmo nome do arquivo
 #e precisa terminar com a palavra Controller
-class UsuariosController {
+class UsersController {
 
 	#construtor, é iniciado sempre que a classe é chamada
 	function __construct() {
@@ -18,10 +18,17 @@ class UsuariosController {
 			redirect("autenticacao");
 			die();
 		}
+
+
+		#proibe o usuário de entrar caso não tenha autorização
+		if ($_SESSION['user']['tipo'] < User::ADMIN_USER){
+			header("HTTP/1.1 401 Unauthorized");
+			die();
+		}
 	}
-		
+
 	/**
-	* Para acessar http://localhost/NOMEDOPROJETO/usuarios/index
+	* Para acessar http://localhost/NOMEDOPROJETO/users/index
 	**/
 	function index($id = null){
 
@@ -29,7 +36,7 @@ class UsuariosController {
 		$send = [];
 
 		#cria o model
-		$model = new Usuario();
+		$model = new User();
 		
 		
 		$send['data'] = null;
@@ -43,15 +50,16 @@ class UsuariosController {
 		$send['lista'] = $model->all();
 
 		#$send['tipos'] = [0=>"Escolha uma opção", 1=>"Usuário comum", 2=>"Admin"];
+		$send['tipos'] = User::$userTypes;
 
 		#chama a view
-		render("usuarios", $send);
+		render("users", $send);
 	}
 
 	
 	function salvar($id=null){
 
-		$model = new Usuario();
+		$model = new User();
 		
 		if ($id == null){
 			$id = $model->save($_POST);
@@ -59,15 +67,15 @@ class UsuariosController {
 			$id = $model->update($id, $_POST);
 		}
 		
-		redirect("usuarios/index/$id");
+		redirect("users/index/$id");
 	}
 
 	function deletar(int $id){
 		
-		$model = new Usuario();
+		$model = new User();
 		$model->delete($id);
 
-		redirect("usuarios/index/");
+		redirect("users/index/");
 	}
 
 
